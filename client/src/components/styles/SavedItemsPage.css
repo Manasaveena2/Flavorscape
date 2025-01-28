@@ -1,0 +1,29 @@
+.saved-items-page {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .saved-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  
+  .saved-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .saved-item h2 {
+    margin: 0;
+  }
+  
+  .saved-item p {
+    margin: 5px 0;
+    color: #555;
+  }
+  

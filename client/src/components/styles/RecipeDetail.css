@@ -1,0 +1,153 @@
+
+/* Styling for Recipe Detail Page */
+.recipe-detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align all items to the left */
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 100%;
+  background: #f8f8f8;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 1.5rem;
+  color: #2a9d8f; /* Make sure the color stands out */
+  padding: 10px;
+  z-index: 20; /* Ensure it's on top */
+  transition: color 0.3s ease;
+}
+
+.back-button:hover {
+  color: #1f7a6f;
+}
+
+.back-arrow {
+  font-size: 1.5rem;  /* Make sure it's large enough */
+  margin-right: 8px; /* Space between the arrow and text */
+}
+
+.recipe-title {
+  font-family: 'Georgia', serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  align-self: center; /* Align heading to the left */
+}
+
+.recipe-image {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  margin: 0 auto 30px auto; /* Center the image */
+}
+
+.recipe-description,
+.category,
+.preparation-steps,
+.diet-details,
+.nutritional-info {
+  text-align: left; /* Align text to the left */
+}
+
+.recipe-description {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.category {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2a9d8f;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.preparation-steps p,
+.diet-details li,
+.nutritional-info li {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.diet-details {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nutritional-info {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nutritional-info li {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.nutritional-info li span {
+  font-weight: normal;
+  color: #555;
+}
+
+.social-share-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.social-icon:hover {
+  color: #2a9d8f;
+}
+
+@media (max-width: 768px) {
+  .recipe-detail-container {
+    padding: 10px;
+  }
+
+  .recipe-title {
+    font-size: 2rem;
+  }
+
+  .recipe-image {
+    max-width: 100%;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .preparation-steps p,
+  .diet-details li,
+  .nutritional-info li {
+    font-size: 1rem;
+  }
+}

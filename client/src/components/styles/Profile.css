@@ -1,0 +1,38 @@
+/* Profile Page Styles */
+.profile-container {
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-container h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.profile-info {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.profile-info p {
+  margin: 5px 0;
+}
+
+.profile-container button {
+  padding: 12px 20px;
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.profile-container button:hover {
+  background-color: #e03e00;
+}

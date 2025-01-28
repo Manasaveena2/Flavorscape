@@ -1,0 +1,238 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    background-color:black;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    position:sticky;
+    align-items: center;
+  }
+  
+  .navbar h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #e3312d; /* Epicurious red */
+  }
+  
+  /* Top section styling */
+  .top-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0;
+    position:relative;
+  }
+  
+  .top-left button {
+    background: none;
+    border: none;
+    margin-right: 15px;
+    font-size: 16px;
+    color: #e3312d;
+    cursor: pointer;
+  }
+  
+  .top-left button:hover {
+    text-decoration: underline;
+  }
+  
+  .top-right input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 400px;
+  }
+  
+  /* Dropdown styling */
+  /* Dropdown styling */
+.dropdown {
+  background-color: white; /* Keep background color for visibility */
+  padding: 10px 0; /* Reduced padding to align content properly */
+  border: none; /* Remove border to avoid card appearance */
+  box-shadow: none; /* Remove shadow for flat layout */
+  position: relative;
+  top: 0; /* Align directly under the navbar */
+  left: 0; /* Align to the left edge */
+  z-index: 999;
+  width: 100%; /* Ensure it spans the entire width */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0; /* Remove any additional spacing */
+}
+
+/* Dropdown inner content */
+.dropdown div {
+  flex: 1;
+  padding: 0 15px; /* Add horizontal padding for proper spacing */
+}
+
+.dropdown strong {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e3312d;
+  padding-bottom: 5px;
+}
+
+/* Optional: Buttons inside the dropdown */
+.dropdown button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #007aff;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.dropdown button:hover {
+  text-decoration: underline;
+}
+
+/* Close Button */
+.dropdown .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+
+.dropdown .close-btn:hover {
+  color: #e3312d;
+}
+.dropdown strong {
+  font-size: 16px;
+  color: #333;
+  display: inline-block; /* Ensure it only takes the space of its content */
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e3312d;
+  padding-bottom: 5px;
+  width: auto; /* Adjust if needed */
+  max-width: fit-content; /* Limit the underline to the content */
+}
+
+
+/* Navbar and Top Section for Consistency */
+.navbar {
+  background-color: black;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  position: sticky;
+  align-items: center;
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin-bottom: 0;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+}
+.top-stories {
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+.top-stories h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.stories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Auto-responsive grid */
+  gap: 30px; /* Increase gap between rows and columns */
+}
+
+.story-card {
+  width: 100%; /* Ensure the card fills the grid cell */
+  max-width: 350px; /* Set a max width for the cards */
+  height: 300px; /* Increased card height */
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.story-card img {
+  width: 100%;
+  height: 250px; /* Increased image height */
+  object-fit: cover;
+}
+
+.story-card h3 {
+  font-size: 18px;
+  margin: 15px;
+  color: #e3312d;
+}
+
+.story-card p {
+  font-size: 14px;
+  margin: 10px 15px;
+  color: #666;
+}
+
+.story-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Detailed Recipe View */
+.recipe-detail {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.recipe-detail .back-btn {
+  background-color: #e3312d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.text{
+  text-align: center;
+}
+.input-btn{
+    display: flex; /* Enables flexbox on the container */
+    justify-content: center; /* Horizontally centers the input field */
+    align-items: center; /* Vertically centers the input field *//* Ensures the parent takes the full viewport height */
+}
+.input-btn input{
+  padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 400px;
+   
+}

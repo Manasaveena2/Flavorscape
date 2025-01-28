@@ -1,0 +1,35 @@
+.contact-us {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .contact-us form {
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-us label {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    text-align: start;
+  }
+  
+  .contact-us input,
+  .contact-us textarea {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .contact-us button {
+    padding: 0.8rem;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

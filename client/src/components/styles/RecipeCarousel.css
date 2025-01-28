@@ -1,0 +1,24 @@
+.carousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem;
+  }
+  
+  .carousel-item {
+    text-align: center;
+  }
+  
+  .carousel-item img {
+    width: 200px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  .carousel-item p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  

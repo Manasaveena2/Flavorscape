@@ -1,0 +1,96 @@
+/* Register.css */
+
+.register-container {
+  display: flex;
+  height: 100vh;
+  margin: 0; /* Ensure full height */
+}
+
+.register-image {
+  flex: 1;
+  
+  background-size: cover;
+  background-position: center;
+}
+
+.register-form form{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f9;
+  padding: 30px;
+  height: 70%;
+  box-sizing: border-box;
+  margin-top:35px;
+}
+
+.register-form h2 {
+  margin-bottom: 20px;
+}
+
+.register-form form {
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-right:250px;
+}
+
+.register-form div {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.register-form button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-form button:disabled {
+  background-color: #ccc;
+}
+
+.register-form .password-constraints {
+  margin-top: 10px;
+}
+
+.register-form .password-constraints ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.register-form .password-constraints li {
+  font-size: 14px;
+}
+
+.register-form .password-constraints li.valid {
+  color: green;
+}
+
+.register-form .password-constraints li.invalid {
+  color: red;
+}
+
+.register-form p {
+  margin-top: 20px;
+}
+
+.register-form .toggle-link {
+  color: #4CAF50;
+  cursor: pointer;
+}
