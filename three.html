@@ -1,0 +1,143 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        .recipe-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .recipe-card {
+            width: 200px;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .recipe-card:hover {
+            transform: scale(1.05);
+        }
+        .recipe-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        .recipe-card h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        #recipe-details {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<h1>Recipe Finder</h1>
+<div id="recipe-list" class="recipe-list"></div>
+
+<div id="recipe-details">
+    <h2>Recipe Details</h2>
+    <div id="details-content"></div>
+</div>
+
+<script>
+// API configuration
+const apiKey = '2cf363e464msh40119dd71827212p1759f2jsn9f2d6345d821'; // Replace with your Spoonacular API key
+const searchQuery = 'sweet';  // Modify the search query as needed
+const url = `https://api.spoonacular.com/recipes/complexSearch?query=${searchQuery}&addRecipeNutrition=true&number=10&apiKey=${apiKey}`;
+
+// Fetch recipes
+async function fetchRecipes() {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const data = await response.json();
+        displayRecipes(data.results);  // Display recipes on page
+    } catch (error) {
+        console.error('Error fetching recipes:', error);
+        document.getElementById('recipe-list').innerHTML = `<p style="color:red;">Failed to fetch recipes. Please try again later.</p>`;
+    }
+}
+
+// Display the recipe list
+function displayRecipes(recipes) {
+    const recipeListElement = document.getElementById('recipe-list');
+    recipeListElement.innerHTML = ''; // Clear previous results
+
+    recipes.forEach(recipe => {
+        const card = document.createElement('div');
+        card.classList.add('recipe-card');
+        card.innerHTML = `
+            <img src="${recipe.image}" alt="${recipe.title}">
+            <h3>${recipe.title}</h3>
+        `;
+        // Add event listener to each card to fetch detailed information when clicked
+        card.addEventListener('click', () => fetchRecipeDetails(recipe.id));
+        recipeListElement.appendChild(card);
+    });
+}
+
+// Fetch detailed recipe info when clicked
+async function fetchRecipeDetails(recipeId) {
+    try {
+        // Fetch recipe details
+        const detailsResponse = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`);
+        if (!detailsResponse.ok) throw new Error(`HTTP error! Status: ${detailsResponse.status}`);
+        const recipe = await detailsResponse.json();
+
+        // Fetch full nutritional details
+        const nutritionResponse = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/nutritionWidget.json?apiKey=${apiKey}`);
+        if (!nutritionResponse.ok) throw new Error(`HTTP error! Status: ${nutritionResponse.status}`);
+        const nutritionData = await nutritionResponse.json();
+
+        displayRecipeDetails(recipe, nutritionData);
+    } catch (error) {
+        console.error('Error fetching recipe details:', error);
+        document.getElementById('details-content').innerHTML = `<p style="color:red;">Failed to fetch recipe details. Please try again later.</p>`;
+    }
+}
+
+// Display the detailed recipe info
+function displayRecipeDetails(recipe, nutritionData) {
+    const detailsElement = document.getElementById('details-content');
+    detailsElement.innerHTML = `
+        <h3>${recipe.title}</h3>
+        <img src="${recipe.image}" alt="${recipe.title}" style="width: 200px; height: 150px; object-fit: cover;">
+        <p><strong>Preparation Time:</strong> ${recipe.readyInMinutes} minutes</p>
+        <p><strong>Ingredients:</strong></p>
+        <ul>
+            ${recipe.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}
+        </ul>
+        <p><strong>Instructions:</strong> ${recipe.instructions || 'No instructions available'}</p>
+        <h4>Nutritional Information:</h4>
+        <ul>
+            ${nutritionData.nutrients.map(nutrient => `
+                <li><strong>${nutrient.name}:</strong> ${nutrient.amount} ${nutrient.unit}</li>
+            `).join('')}
+        </ul>
+    `;
+}
+
+// Call the fetchRecipes function when the page loads
+fetchRecipes();
+</script>
+
+</body>
+</html>

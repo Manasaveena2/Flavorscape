@@ -48,12 +48,7 @@ const savedItemSchema = new mongoose.Schema({
   // userId: { type: mongoose.Schema.Types.ObjectId, required: true },
   recipeId: { type: String, required: true },
   title: { type: String, required: true },
-  description: { type: String, required: true },
   imageUrl: { type: String, required: true },
-  name: { type: String, required: false }, // Optional field
-  category: { type: String, required: false }, // Optional field
-  videoUrl: { type: String, required: false }, // Added videoUrl field
-  createdAt: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('SavedItem', savedItemSchema);

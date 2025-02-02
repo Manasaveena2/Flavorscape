@@ -182,7 +182,8 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const savedItemRoutes = require('./routes/savedItemRoutes'); // Import saved item routes
 const contactUsRoutes = require('./routes/contactUsRoutes');
-
+const adminRoutes=require('./routes/adminRoutes');
+const profile =require('./routes/profile');
 dotenv.config();
 
 const app = express();
@@ -197,9 +198,13 @@ app.use('/api/user', userRoutes);  // User-related routes
 // app.use('/api/saved-items', savedItemRoutes);  // Saved item routes
 app.use('/api', contactUsRoutes);
 app.use('/api/saved-items', authRoutes);  
-// app.use('/saved-items',authRoutes)
+app.use('/api/admin', adminRoutes); 
+// app.use('/saved-items',authRoutes);
+app.use('/api/saved-items',savedItemRoutes);
+app.use('/api/saved-items/details',savedItemRoutes);
 // app.use('/profile',authRoutes);
 
+app.use('/api/profile',profile);
 // Database connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))

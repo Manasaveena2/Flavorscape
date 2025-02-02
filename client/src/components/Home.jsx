@@ -11,13 +11,13 @@ const Home = () => {
 
   // Handler for "Explore Now" button click
   const handleExploreClick = () => {
-    if (user) {
-      navigate('/welcome'); // Redirect to the welcome page if logged in
+    const isAdminLoggedIn = localStorage.getItem("adminToken"); // Check if admin is logged in
+    if (user || isAdminLoggedIn) {
+      navigate('/welcome'); // Redirect to the welcome page if logged in as user or admin
     } else {
-      navigate('/login'); // Redirect to the login page if not logged in
+      navigate('/AccessPage'); // Redirect to the login page if neither logged in
     }
   };
-
   return (
     <div className="home">
       {/* Video Background Section */}
