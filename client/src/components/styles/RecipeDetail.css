@@ -1,153 +1,181 @@
 
-/* Styling for Recipe Detail Page */
 .recipe-detail-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align all items to the left */
-  padding: 20px;
-  margin: 0 auto;
-  max-width: 100%;
-  background: #f8f8f8;
-  font-family: 'Roboto', sans-serif;
-  position: relative;
-}
-
-.back-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
   align-items: center;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 1.5rem;
-  color: #2a9d8f; /* Make sure the color stands out */
-  padding: 10px;
-  z-index: 20; /* Ensure it's on top */
-  transition: color 0.3s ease;
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+}
+.but{
+  display: flex;
+  justify-content: space-between;
+}
+.top-right-icons {
+  
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
 }
 
-.back-button:hover {
-  color: #1f7a6f;
-}
-
-.back-arrow {
-  font-size: 1.5rem;  /* Make sure it's large enough */
-  margin-right: 8px; /* Space between the arrow and text */
-}
-
+/* Centered Title */
 .recipe-title {
-  font-family: 'Georgia', serif;
-  font-size: 2.5rem;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 20px;
-  align-self: center; /* Align heading to the left */
 }
 
+/* Centered Image */
 .recipe-image {
-  width: 100%;
-  max-width: 600px;
+  width: 50%;
+  align-self: center;
+  max-width: 500px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  margin: 0 auto 30px auto; /* Center the image */
-}
-
-.recipe-description,
-.category,
-.preparation-steps,
-.diet-details,
-.nutritional-info {
-  text-align: left; /* Align text to the left */
-}
-
-.recipe-description {
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.6;
   margin-bottom: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.category {
+/* Grid Layout for Remaining Details */
+.recipe-info-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Individual Cards (Styled Info Boxes) */
+.info-box {
+  background: #f4f4f4; /* Light gray for a clean, formal look */
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect for Cards */
+.info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  background: #ececec;
+}
+
+/* Heading Styling (Now Clearly Visible) */
+.info-box h3 {
+  color: black;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #2a9d8f;
-  margin-bottom: 20px;
-}
-
-h3 {
-  font-family: 'Arial', sans-serif;
-  font-size: 1.5rem;
-  color: #333;
   margin-bottom: 10px;
 }
 
-.preparation-steps p,
-.diet-details li,
-.nutritional-info li {
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.6;
+/* Like & Save Buttons */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.diet-details {
-  list-style-type: none;
-  padding: 0;
+.like-button, .save-button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.nutritional-info {
-  list-style-type: none;
-  padding: 0;
+.like-button {
+  background-color: transparent;
+  color: black;
 }
 
-.nutritional-info li {
-  font-weight: bold;
-  margin-bottom: 5px;
+.like-button:hover {
+  background-color: transparent;
+  transform: scale(1.05);
 }
 
-.nutritional-info li span {
-  font-weight: normal;
-  color: #555;
+.save-button {
+  background-color: white;
+  color: black;
 }
 
+.save-button:hover {
+  background-color: transparent;
+  transform: scale(1.05);
+}
+
+.save-button[disabled] {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+/* Back Button */
+.back-button {
+  top: 10px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1 rem;
+  cursor: pointer;
+}
+
+.back-arrow {
+  font-size: 1 rem;
+  color: black;
+}
 .social-share-buttons {
   display: flex;
+  justify-content: center;
   gap: 10px;
   margin-top: 20px;
 }
 
-.social-icon {
-  font-size: 1.5rem;
+.social-share-buttons button {
+  border: none;
+  padding: 10px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: color 0.3s;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }
 
-.social-icon:hover {
-  color: #2a9d8f;
+/* Brand Colors for Social Media */
+.social-share-buttons button:nth-child(1) {
+  background-color: #3b5998; /* Facebook */
+  color:white;
 }
 
-@media (max-width: 768px) {
-  .recipe-detail-container {
-    padding: 10px;
-  }
+.social-share-buttons button:nth-child(2) {
+  background-color: #1da1f2; /* Twitter */
+  color: white;
+}
 
-  .recipe-title {
-    font-size: 2rem;
-  }
+.social-share-buttons button:nth-child(3) {
+  background-color: #bd081c; /* Pinterest */
+  color: white;
+}
 
-  .recipe-image {
-    max-width: 100%;
-  }
+.social-share-buttons button:nth-child(4) {
+  background-color: #25d366; /* WhatsApp */
+  color: white;
+}
+.facebook-btn { background-color: #3b5998; color: white; }
+.twitter-btn { background-color: #1da1f2; color: white; }
+.pinterest-btn { background-color: #bd081c; color: white; }
+.whatsapp-btn { background-color: #25d366; color: white; }
 
-  h3 {
-    font-size: 1.2rem;
-  }
-
-  .preparation-steps p,
-  .diet-details li,
-  .nutritional-info li {
-    font-size: 1rem;
-  }
+.social-share-buttons button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }

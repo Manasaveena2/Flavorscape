@@ -1,0 +1,112 @@
+/* Styling for Recipe Detail Page */
+/* Recipe Category Section */
+/* Recipe Category Container */
+
+.recipe-list {
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.App{
+    padding: 20px;;
+}
+.recipe-card {
+    width: 200px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius:10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.recipe-card:hover {
+    transform: scale(1.05);
+}
+.recipe-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+.recipe-card h3 {
+    font-size: 16px;
+    margin: 10px 0;
+    color:black;
+}
+#recipe-details {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.h3{
+    color:black;
+}
+.back-button{
+    background-color: transparent;
+    border-width:0px;
+    cursor: pointer;
+
+}
+
+/* Container for the Recipe Search Section */
+.recipe-search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px; /* p-6 equivalent */
+}
+
+/* Title of the Recipe Search Section */
+.recipe-search-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: bold;
+    margin-bottom: 16px; /* mb-4 */
+}
+
+/* Container for the nutrient control section */
+.nutrient-control-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* gap-4 */
+    margin-bottom: 24px; /* mb-6 */
+}
+
+/* Individual nutrient control (Carbs, Protein, Fats) */
+.nutrient-control {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* space-x-2 */
+}
+
+/* Button for increment and decrement */
+.nutrient-btn {
+    padding: 8px;
+    background-color: #e2e8f0; /* bg-gray-200 */
+    border-radius: 8px;
+}
+
+/* Input fields for Max Time and Recipe Name */
+.input-field {
+    padding: 8px;
+    border: 1px solid #cbd5e0; /* border equivalent */
+    border-radius: 8px;
+    
+}
+
+/* Container for the time and name input fields */
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* gap-4 */
+    margin-bottom: 24px; /* mb-6 */
+}
+
+/* Search button */
+.search-btn {
+    padding: 12px 16px;
+    background-color: #3b82f6; /* bg-blue-500 */
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}

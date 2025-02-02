@@ -1,188 +1,186 @@
 
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
-import { AllRecipes } from "../data/AllRecipe"; // Ensure this path is correct
-
-import { FaFacebookF, FaTwitter, FaPinterestP, FaWhatsapp, FaArrowLeft } from "react-icons/fa";
-import axios from "axios"; // Import axios to make API requests
-import { useAuth } from "../context/AuthContext"; // To get the current user's authentication status
-
-import "./styles/RecipeDetail.css"; // Import styles
+import { useAuth } from "../context/AuthContext"; 
+import axios from 'axios';
+import { FaFacebookF, FaTwitter, FaPinterestP, FaWhatsapp, FaArrowLeft,FaHeart, FaBookmark, } from "react-icons/fa";
+import "./styles/RecipeDetail.css"
 
 const RecipeDetail = () => {
-  const { id } = useParams(); // Get the ID from the URL
-  const recipe = AllRecipes.find((r) => r.id === parseInt(id)); // Find recipe by ID
-  const [isSaved, setIsSaved] = useState(false); // Track if the recipe is saved
+  const { id } = useParams(); // Get the recipe ID from the URL
+  const [recipe, setRecipe] = useState(null);
+  const [nutrition, setNutrition] = useState(null);
+  const [isSaved, setIsSaved] = useState(false); 
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(false);
   const { user } = useAuth(); // Get the authenticated user from context
 
-  // If no recipe is found, show an error message
-  if (!recipe) {
-    return <div>Recipe not found!</div>;
-  }
+  const apiKey = '2cf363e464msh40119dd71827212p1759f2jsn9f2d6345d821'; // Replace with your API key
 
-  // Handle saving the recipe to the database (via API)
-  const handleSaveRecipe = async () => {
-    // console.log('User object:', user);
-// console.log('User ID:', user.id);
-const userId = localStorage.getItem('userId');
-console.log(user);
-    if (!user) {  // Ensure the user is authenticated before saving
-      alert("You need to be logged in to save a recipe");
-      return;
-    }
-    
+  // Fetch the recipe details
+  useEffect(() => {
+    const fetchRecipeDetails = async () => {
+      try {
+        const recipeResponse = await axios.get(
+          `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/information`,
+          {
+            headers: {
+              'x-rapidapi-key': apiKey,
+              'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+            },
+          }
+        );
 
-    try {
-      // Send the POST request to save the recipe
-      
-      const response = await axios.post("http://localhost:5000/api/saved-items\\", { // Ensure the correct backend URL
-        // userId: userId, // Pass the user's id
-        recipeId: recipe.id, // Pass the recipe's id (modified to use id from AllRecipes)
-        title: recipe.recipeTitle, // Send the recipe title as well
-        description: recipe.recipeDescription, // Send the recipe description
-        imageUrl: recipe.imgUrl, // Send the recipe image URL
-        name: recipe.recipeTitle,  // Ensure name is included
-  videoUrl:recipe.videoUrl
-      });
+        const nutritionResponse = await axios.get(
+          `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/nutritionWidget.json`,
+          {
+            headers: {
+              'x-rapidapi-key': apiKey,
+              'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+            },
+          }
+        );
 
-      if (response.status === 201) {
-        setIsSaved(true); // Update state to reflect that the recipe is saved
-        alert("Recipe saved successfully");
+        setRecipe(recipeResponse.data);
+        setNutrition(nutritionResponse.data);
+      } catch (error) {
+        console.error('Error fetching recipe details:', error);
       }
-    } catch (error) {
-      console.error("Error saving recipe:", error);
-      alert("Error saving recipe");
-    }
-  };
+    };
+    fetchRecipeDetails();
+  }, [id]);
 
-  // Social media sharing functionality
-  const shareOnSocialMedia = (platform) => {
-    const url = window.location.href; // Current recipe page URL
-    const title = recipe.recipeTitle;
-    const image = recipe.imgUrl; // image to be shared
+  if (!recipe) {
+    return <p>Loading...</p>;
+  }
+  const handleSaveRecipe = async () => {
+        console.log('User object:', user);
+    // console.log('User ID:', );
+    // const userId = localStorage.getItem('userId');
 
-    switch (platform) {
-      case "facebook":
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-          "_blank"
-        );
-        break;
-      case "twitter":
-        window.open(
-          `https://twitter.com/intent/tweet?text=${title}&url=${url}`,
-          "_blank"
-        );
-        break;
-      case "pinterest":
-        window.open(
-          `https://www.pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}`,
-          "_blank"
-        );
-        break;
-      case "whatsapp":
-        window.open(
-          `https://wa.me/?text=${title} - ${url}`,
-          "_blank"
-        );
-        break;
-      default:
-        break;
-    }
-  };
+    console.log(user.user.email);
 
-  // Split preparation steps into an array
-  const preparationSteps = recipe.preparationDescription
-    .split("\n") // Split by newline character
-    .map((step) => step.trim()) // Trim extra spaces around each step
-    .filter((step) => step.length > 0);
+    console.log("user id is ",user.user._id);
+    const userId=user.user._id;
+    // console.log("user id is ",userId);
+    console.log(user);
+        if (!user) {  // Ensure the user is authenticated before saving
+          alert("You need to be logged in to save a recipe");
+          return;
+        }
+        
+    
+        try {
+          // Send the POST request to save the recipe
+ // Get userId from authenticated user
+    console.log("User ID being sent is:",
+       userId); // Debugging log
 
-  return (
-    <div className="recipe-detail-container">
-      <button className="back-button" onClick={() => navigate(-1)}>
-        <FaArrowLeft className="back-arrow" />
-        Back
-      </button>
-      <h1 className="recipe-title">{recipe.recipeTitle}</h1>
-      <img
-        src={`${process.env.PUBLIC_URL}/topstories/${recipe.imgUrl}`} // Make sure imgUrl is properly stored in your assets folder
-        alt={recipe.recipeTitle}
-        className="recipe-image"
-      />
-      <p className="recipe-description">
-        <strong>Description:</strong> {recipe.recipeDescription}
-      </p>
-      {/* <p className="category">
-        <strong>Category:</strong> {recipe.category}
-      </p> */}
-      <div>
-  <a href={recipe.videoUrl} target="_blank" rel="noopener noreferrer">
-    Watch Video
-  </a>
-</div>
+          const response = await axios.post("http://localhost:5000/api/saved-items/", { // Ensure the correct backend URL
+              // Pass the user's id
+              userId:userId,
+             recipeId: recipe.id, // Pass the recipe's id (modified to use id from AllRecipes)
+            title: recipe.title, // Send the recipe title as well
+    //       description: recipe.recipeDescription, // Send the recipe description
+           imageUrl: recipe.image, // Send the recipe image URL
+    //         name: recipe.recipeTitle,  // Ensure name is included
+    //   videoUrl:recipe.videoUrl
+          });
+    
+          if (response.status === 201) {
+            setIsSaved(true); // Update state to reflect that the recipe is saved
+            alert("Recipe saved successfully");
+          }
+        } catch (error) {
+          console.error("Error saving recipe:", error);
+          alert("Error saving recipe");
+        }
+      };
+      const handleLikeRecipe = () => {
+        setIsLiked(!isLiked); // Toggle the like status
+        alert(isLiked ? "You unliked this recipe" : "You liked this recipe");
+      };
+      return (
+        <div className='p-4'>
+          <div className='but'>
+             <button className="back-button" onClick={() => navigate(-1)}>
+               <FaArrowLeft className="back-arrow" />
+             </button>
+              <div className="top-right-icons">
+                 <button onClick={handleLikeRecipe} className="like-button">
+                   <FaHeart style={{ color: isLiked ? 'red' : '#ccc' }} />
+                </button>
+                <button className={`save-button ${isSaved ? "saved" : ""}`} onClick={handleSaveRecipe} disabled={isSaved}>
+                   <FaBookmark/>
+                </button>
+              </div>
+          </div>
+        
+      
 
-      <h3>Preparation Steps:</h3>
-      <div className="preparation-steps">
-        {preparationSteps.map((step, index) => (
-          <p key={index}>{step}</p>
-        ))}
-      </div>
-      <h3>Diet Details:</h3>
-      <ul className="diet-details">
-        {recipe.dietDetails.map((detail, index) => (
-          <li key={index}>{detail}</li>
-        ))}
-      </ul>
-      <h3>Nutritional Information (Per {recipe.nutritionalInformation.servingSize}):</h3>
-      <ul className="nutritional-info">
-        {Object.entries(recipe.nutritionalInformation).map(([key, value]) => (
-          <li key={key}>
-            <strong>{key}:</strong> <span>{value}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* Social media share buttons */}
-      <div className="social-share-buttons">
-        <button onClick={() => shareOnSocialMedia("facebook")}>
-          <FaFacebookF className="social-icon" />
-        </button>
-        <button onClick={() => shareOnSocialMedia("twitter")}>
-          <FaTwitter className="social-icon" />
-        </button>
-        <button onClick={() => shareOnSocialMedia("pinterest")}>
-          <FaPinterestP className="social-icon" />
-        </button>
-        <button onClick={() => shareOnSocialMedia("whatsapp")}>
-          <FaWhatsapp className="social-icon" />
-        </button>
-      </div>
-
-      {/* Save button */}
-      <div>
-        <button
-          onClick={handleSaveRecipe} // Call the function to save the recipe
-          style={{ backgroundColor: isSaved ? "gray" : "#2a9d8f" }}
-          disabled={isSaved}
-        >
-          {isSaved ? "Recipe Saved" : "Save Recipe"}
-        </button>
-      </div>
-    </div>
-  );
+        <div className="recipe-detail-container">
+          <h2 className="recipe-title">{recipe.title}</h2>
+          <img src={recipe.image} alt={recipe.title} className="recipe-image" />
+      
+          {/* Horizontal Grid for Details */}
+          <div className="recipe-info-container">
+            {/* Column 1: Preparation & Servings */}
+            <div className="info-box">
+              <h3>Details</h3>
+              <p><strong>Preparation Time:</strong> {recipe.readyInMinutes} minutes</p>
+              <p><strong>Servings:</strong> {recipe.servings}</p>
+            </div>
+      
+            {/* Column 2: Ingredients */}
+            <div className="info-box">
+              <h3>Ingredients</h3>
+              <ul>
+                {recipe.extendedIngredients.map((ingredient) => (
+                  <li key={ingredient.id}>{ingredient.original}</li>
+                ))}
+              </ul>
+            </div>
+      
+            {/* Column 3: Instructions */}
+            <div className="info-box">
+              <h3>Instructions</h3>
+              <p>
+                {recipe.instructions ? recipe.instructions.replace(/<\/?[^>]+(>|$)/g, "") : "No instructions available"}
+              </p>
+            </div>
+      
+            {/* Column 4: Nutrition Info */}
+            <div className="info-box">
+              <h3>Nutritional Information</h3>
+              <ul>
+                {nutrition?.nutrients?.map((nutrient) => (
+                  <li key={nutrient.name}>
+                    <strong>{nutrient.name}:</strong> {nutrient.amount} {nutrient.unit}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+      
+          <div className="social-share-buttons">
+    <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, "_blank")}>
+          <FaFacebookF className="facebook-btn" />
+         </button>
+         <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${recipe.title}&url=${window.location.href}`, "_blank")}>
+           <FaTwitter className="twitter-btn" />
+         </button>
+         <button onClick={() => window.open(`https://www.pinterest.com/pin/create/button/?url=${window.location.href}&media=${recipe.image}&description=${recipe.title}`, "_blank")}>
+           <FaPinterestP className="pinterest-btn" />
+         </button>
+         <button onClick={() => window.open(`https://wa.me/?text=${recipe.title} - ${window.location.href}`, "_blank")}>
+           <FaWhatsapp className="whatsapp-btn" />
+         </button>
+       </div>
+         
+        </div>
+        </div>
+      );
+      
 };
 
 export default RecipeDetail;
-
-
-
-
-
-
-
-
-
-
-

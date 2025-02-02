@@ -71,13 +71,18 @@ const SavedItemsPage = () => {
   useEffect(() => {
     const fetchSavedItems = async () => {
       try {
+        const userId=user.user._id;
+        console.log(userId);
         if (!user?.token) {
           throw new Error("User not authenticated.");
         }
       
-        const response = await axios.get("http://localhost:5000/api/saved-items", {
-          //  headers: { Authorization: `Bearer ${user.token}` },
-        });
+        // const response = await axios.get("http://localhost:5000/api/saved-items", {
+        //   userId
+        //   //  headers: { Authorization: `Bearer ${user.token}` },
+        // });
+        const response = await axios.post("http://localhost:5000/api/saved-items/details", { userId });
+
 
         setSavedItems(response.data);
       } catch (err) {
@@ -104,7 +109,7 @@ const SavedItemsPage = () => {
             <li key={item._id} className="saved-item">
               <h2>{item.title}</h2>
               <p>{item.description}</p>
-              <p>novacapture</p>
+              {/* <p>novacapture</p> */}
               {item.imageUrl && <img src={item.imageUrl} alt={item.title} />}
             </li>
           ))}
